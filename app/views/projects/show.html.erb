@@ -1,6 +1,6 @@
 <h1><%= @project.name %></h1>
 
-<% if @project.todos %>
+<% if @project.todos.present? %>
   
   <h2>Project Todos</h2>
 
@@ -13,7 +13,14 @@
       </ul>
     </div>
   </div>
+
+<% else %>
+
+  <div class="well">
+    No todos added yet.
+    <%= link_to "Add some todos", edit_project_path(@project) %> to your project.
+  </div>
+
 <% end %>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= link_to "Edit Project", edit_project_path(@project), class: "btn btn-primary" %>

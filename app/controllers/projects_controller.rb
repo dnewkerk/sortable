@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :set_todos, only: [:new, :edit]
 
   # GET /projects
   # GET /projects.json
@@ -16,10 +15,12 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @project.todos.build
   end
 
   # GET /projects/1/edit
   def edit
+    @project.todos.build if @project.todos.blank?
   end
 
   # POST /projects
@@ -66,10 +67,6 @@ class ProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
-    end
-
-    def set_todos
-      @project.todos.build if @project.todos.blank?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
