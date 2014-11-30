@@ -1,0 +1,64 @@
+<%= form_for @project, html: { class: "sortable" } do |f| %>
+
+  <% if @project.errors.any? %>
+    <div class="error_explanation alert alert-danger" role="alert">
+      <h2><%= pluralize(@project.errors.count, "error") %> prevented this project from being saved:</h2>
+
+      <ul>
+      <% @project.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-4">
+
+      <div class="well">
+        <div class="form-group">
+          <%= f.label :name, "Project name", class: "control-label" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+
+
+      <h2>Todos</h2>
+
+      <ul>
+      <%= f.fields_for :todos do |ff| %>
+        <li>
+          <div class="row">
+            <div class="col-md-11">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="handle input-group-addon"><i class="fa fa-arrows"></i></span>
+                  <%= ff.text_field :name, class: "name form-control" %>
+                </div>
+                <%= ff.hidden_field :_destroy, class: "destroy" %>
+                <%= ff.hidden_field :position, class: "position" %>
+                <%= ff.hidden_field :id, class: "id" %>
+              </div>
+            </div>
+
+            <div class="col-md-1">
+              <i class="remove fa fa-times"></i>
+            </div>
+          </div>
+        </li>
+      <% end %>
+      </ul>
+
+      <div class="add form-group">
+        <i class="fa fa-plus"></i> <a href="#">Add Todo</a>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.submit "Save", class: "btn btn-primary" %>
+      </div>
+
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,7 @@
+<h1 class="page-header">Projects</h1>
+
+<% @projects.each do |project| %>
+  <h2><%= link_to project.name, project %></h2>
+<% end %>
+
+<%= link_to 'New Project', new_project_path %>
