@@ -71,25 +71,29 @@ textarea {
 
 /* Sortable form fields */
 
-.sortable {
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+ul.sortable {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
   .handle {
     cursor: pointer;
+    margin: 9px 0 0 5px;
+  }
+
+  .remove {
+    cursor: pointer;
+    margin: 9px 0 0 -16px;
   }
 
   .placeholder {
     border: 2px dashed #eee;
     min-height: 40px;
   }
+}
 
-  .remove {
-    margin-left: -16px;
-    padding: 8px 0 0;
-    cursor: pointer;
+.nested-fields {
+  .add {
+    margin: 0 0 15px 6px;
   }
 }

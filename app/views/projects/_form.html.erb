@@ -1,4 +1,4 @@
-<%= form_for @project, html: { class: "sortable" } do |f| %>
+<%= form_for @project do |f| %>
 
   <% if @project.errors.any? %>
     <div class="error_explanation alert alert-danger" role="alert">
@@ -25,32 +25,35 @@
 
       <h2>Todos</h2>
 
-      <ul>
-      <%= f.fields_for :todos do |ff| %>
-        <li>
-          <div class="row">
-            <div class="col-md-11">
-              <div class="form-group">
-                <div class="input-group">
-                  <span class="handle input-group-addon"><i class="fa fa-arrows"></i></span>
+      <div class="nested-fields">
+        <ul class="sortable">
+        <%= f.fields_for :todos do |ff| %>
+          <li>
+            <div class="row">
+              <div class="col-md-1">
+                <i class="handle fa fa-arrows"></i>
+              </div>
+
+              <div class="col-md-10">
+                <div class="form-group">
                   <%= ff.text_field :name, class: "name form-control" %>
+                  <%= ff.hidden_field :_destroy, class: "destroy" %>
+                  <%= ff.hidden_field :position, class: "position" %>
+                  <%= ff.hidden_field :id, class: "id" %>
                 </div>
-                <%= ff.hidden_field :_destroy, class: "destroy" %>
-                <%= ff.hidden_field :position, class: "position" %>
-                <%= ff.hidden_field :id, class: "id" %>
+              </div>
+
+              <div class="col-md-1">
+                <i class="remove fa fa-times"></i>
               </div>
             </div>
+          </li>
+        <% end %>
+        </ul>
 
-            <div class="col-md-1">
-              <i class="remove fa fa-times"></i>
-            </div>
-          </div>
-        </li>
-      <% end %>
-      </ul>
-
-      <div class="add form-group">
-        <i class="fa fa-plus"></i> <a href="#">Add Todo</a>
+        <div class="add">
+          <i class="fa fa-plus"></i> <a href="#">Add Todo</a>
+        </div>
       </div>
 
 
